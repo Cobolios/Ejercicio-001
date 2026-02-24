@@ -1,0 +1,32 @@
+gcc -O2 -std=c11 cache_demo.c -o cache_demo
+valgrind --tool=cachegrind --cache-sim=yes --branch-sim=yes ./cache_demo c
+==1033== Cachegrind, a high-precision tracing profiler
+==1033== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==1033== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==1033== Command: ./cache_demo c
+==1033== 
+--1033-- Warning: Cannot auto-detect cache config, using defaults.
+--1033--          Run with -v to see.
+N = 4096
+Suma (ignorar): 2139095040
+Por columnas: 1.007486 s
+==1033== 
+==1033== I refs:        151,126,182
+==1033== I1  misses:          1,278
+==1033== LLi misses:          1,195
+==1033== I1  miss rate:        0.00%
+==1033== LLi miss rate:        0.00%
+==1033== 
+==1033== D refs:         54,570,147  (33,584,469 rd   + 20,985,678 wr)
+==1033== D1  misses:     17,828,134  (16,778,913 rd   +  1,049,221 wr)
+==1033== LLd misses:     17,827,658  (16,778,491 rd   +  1,049,167 wr)
+==1033== D1  miss rate:        32.7% (      50.0%     +        5.0%  )
+==1033== LLd miss rate:        32.7% (      50.0%     +        5.0%  )
+==1033== 
+==1033== LL refs:        17,829,412  (16,780,191 rd   +  1,049,221 wr)
+==1033== LL misses:      17,828,853  (16,779,686 rd   +  1,049,167 wr)
+==1033== LL miss rate:          8.7% (       9.1%     +        5.0%  )
+==1033== 
+==1033== Branches:       20,994,503  (20,994,389 cond +        114 ind)
+==1033== Mispredicts:         6,760  (     6,686 cond +         74 ind)
+==1033== Mispred rate:          0.0% (       0.0%     +       64.9%   )
